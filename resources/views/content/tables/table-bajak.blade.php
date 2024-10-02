@@ -26,24 +26,6 @@
       </ul>
     </div>
 
-    <!-- Dropdown Filter Waktu -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Filter Waktu
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item" href="{{ route('tables-bajak', array_merge(request()->query(), ['filterTime' => 'daily'])) }}">Harian</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="{{ route('tables-bajak', array_merge(request()->query(), ['filterTime' => 'weekly'])) }}">Mingguan</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="{{ route('tables-bajak', array_merge(request()->query(), ['filterTime' => 'monthly'])) }}">Bulanan</a>
-        </li>
-      </ul>
-    </div>
-
     <!-- Filter Kalender Tanggal -->
     <div>
       <input type="text" id="filterDate" class="form-control" placeholder="Pilih Tanggal" />
@@ -120,9 +102,9 @@
 <script>
   // Inisialisasi Flatpickr pada input dengan ID filterDate
   flatpickr("#filterDate", {
-    dateFormat: "d-M-y", // Pastikan format sesuai dengan format di database (Y-m-d)
+    dateFormat: "j-M-y", // Format tanggal yang diinginkan
     onChange: function(selectedDates, dateStr, instance) {
-        // Redirect ke URL dengan query tanggal yang dipilih
+        console.log('Tanggal dipilih: ', dateStr); // Debugging, lihat di console apakah tanggalnya benar
         const url = new URL(window.location.href);
         url.searchParams.set('filterDate', dateStr);
         window.location.href = url.toString();

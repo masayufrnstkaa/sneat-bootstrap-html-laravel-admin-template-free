@@ -25,22 +25,12 @@ class BajakController extends Controller
         // Filter berdasarkan Plant Group
         return $query->where('PlantGroup', $plantGroup);
       })
-      ->when($filterTime, function ($query, $filterTime) use ($currentDate) {
-        // Filter berdasarkan waktu (daily, weekly, monthly)
-        if ($filterTime == 'daily') {
-          return $query->whereDate('created_at', $currentDate->toDateString());
-        } elseif ($filterTime == 'weekly') {
-          return $query->whereBetween('created_at', [$currentDate->startOfWeek(), $currentDate->endOfWeek()]);
-        } elseif ($filterTime == 'monthly') {
-          return $query->whereMonth('created_at', $currentDate->month);
-        }
-      })
       ->when($filterDate, function ($query, $filterDate) {
         // Filter berdasarkan tanggal spesifik yang dipilih pengguna
         try {
           // Pastikan format tanggal sesuai dengan format yang dikirimkan
           $parsedDate = Carbon::createFromFormat('d-m-y', $filterDate);
-          return $query->whereDate('created_at', $parsedDate->toDateString());
+          return $query->whereDate('test', $parsedDate->toDateString());
         } catch (\Exception $e) {
           // Jika parsing tanggal gagal, maka tidak melakukan filter
           return $query;
