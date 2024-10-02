@@ -4,25 +4,21 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bajak;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Analytics extends Controller
 {
   public function index()
   {
+    // Mengambil rata-rata 'Total(%)' dan grup 'PlantGroup' dalam satu query
+    $bajakTotalPersentase = Bajak::query()
+      ->select('PlantGroup', DB::raw('AVG(`Total(%)`) as avg_total'))
+      ->whereIn('PlantGroup', ['PG1', 'PG2', 'PG3']) // Filter hanya untuk PG1, PG2, PG3
+      ->groupBy('PlantGroup')
+      ->get()
+      ->pluck('avg_total', 'PlantGroup'); // Mengubah hasil query menjadi key-value pairs
 
-    $plantGroups = Bajak::query()
-      ->select('PlantGroup')
-      ->distinct()
-      ->get();
-
-    $bajakTotalPersentase = [];
-
-    foreach ($plantGroups as $plantGroup) {
-      $bajakTotalPersentase[$plantGroup->PlantGroup] = Bajak::query()
-        ->where('PlantGroup', $plantGroup->PlantGroup)
-        ->avg('Total(%)') ?? 0;
-    }
+    // Mengirim data ke view
     return view('content.dashboard.dashboards-analytics', compact('bajakTotalPersentase'));
   }
 }

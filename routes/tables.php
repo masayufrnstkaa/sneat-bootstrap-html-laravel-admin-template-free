@@ -23,5 +23,6 @@ Route::middleware(['auth'])->group(function () {
   Route::delete('/tables/chopper/{chopper}', [ChopperTable::class, 'destroy'])->name('tables-chopper.destroy');
 
   Route::get('/tables/bajak', [BajakController::class, 'index'])->name('tables-bajak');
+
   Route::get('/tables/subsoil', [SubsoilController::class, 'index'])->name('tables-subsoil');
 });

@@ -15,38 +15,72 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
-    console.log(@json($bajakTotalPersentase));
+    // Mengambil data dari controller (bajakTotalPersentase) yang sudah dikonversi ke JSON
+    const bajakTotalPersentase = @json($bajakTotalPersentase);
+
+    // Log untuk memastikan data yang diterima
+    console.log(bajakTotalPersentase);
+
+    // Menyiapkan data untuk sumbu X (PlantGroup) dan sumbu Y (Total(%) rata-rata)
+    const plantGroups = Object.keys(bajakTotalPersentase); // PG1, PG2, PG3 sebagai sumbu X
+    const totalValues = Object.values(bajakTotalPersentase); // Rata-rata Total(%) sebagai sumbu Y
 
     const totalRevenueChartEl = document.querySelector('#totalRevenueChart');
     const totalRevenueChartOptions = {
             chart: {
-                // height: 317,
-                // stacked: true,
-                type: 'line',
-                // toolbar: { show: false }
+                type: 'bar', // Bar chart
+                height: 350,
             },
-            stroke: {
-              curve: 'smooth',
+            plotOptions: {
+                bar: {
+                    horizontal: false, // Set bar vertikal
+                    columnWidth: '50%', // Lebar kolom
+                    borderRadius: 10, // Ujung bar lebih halus (tidak terlalu kotak)
+                },
             },
             series: [{
                     name: 'Persentase Bajak',
-                    data: [18, 7, 15, 29, 18, 12, 9]
+                    data: totalValues // Menggunakan data dari database untuk sumbu Y
                 }
             ],
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '30%',
-                    borderRadius: 8,
-                    startingShape: 'rounded',
-                    endingShape: 'rounded'
+            xaxis: {
+                categories: plantGroups, // Sumbu X menggunakan PlantGroup (PG1, PG2, PG3)
+                title: {
+                    text: 'Plant Group',
+                    style: {
+                        fontWeight: 'normal' // Judul X tidak bold
+                    }
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Rata-rata Persentase Bajak',
+                    style: {
+                        fontWeight: 'normal' // Judul Y tidak bold
+                    }
                 }
             },
             dataLabels: {
                 enabled: false
             },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent'] // Stroke transparan untuk bar chart
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + "%"; // Menampilkan persentase pada tooltip
+                    }
+                }
+            }
         };  
         
+    // Render chart jika elemen ditemukan
     if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
         const totalRevenueChart = new window.ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
         totalRevenueChart.render();
@@ -55,6 +89,8 @@
   });
 </script>
 @endsection
+
+
 
 @section('content')
 <div class="row">

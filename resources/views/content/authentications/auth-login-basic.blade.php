@@ -11,7 +11,7 @@
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
                 <!-- Register -->
-                <div class="card px-sm-6 px-0">
+                <div class="card px-sm-20 px-0">
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
@@ -23,9 +23,10 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-1">Welcome to {{ config('variables.templateName') }}! 👋</h4>
-                        <p class="mb-6">Please sign-in to your account and start the adventure</p>
-
+                        <div style="text-align: center;">
+                        <h4 class="mb-1">Selamat Datang {{ config('variables.templateName') }}! 👋</h4>
+                        <p class="mb-6">Silahkan Masuk dengan Username dan Kata Sandi Anda</p>
+                        </div>
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -47,7 +48,7 @@
                                     placeholder="Masukan username" autofocus>
                             </div>
                             <div class="mb-6 form-password-toggle">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label" for="password">Kata Sandi</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" class="form-control" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -60,23 +61,23 @@
                                     <div class="form-check mb-0 ms-2">
                                         <input class="form-check-input" type="checkbox" id="remember-me">
                                         <label class="form-check-label" for="remember-me">
-                                            Remember Me
+                                            Ingat Saya
                                         </label>
                                     </div>
                                     <a href="{{ url('auth/forgot-password-basic') }}">
-                                        <span>Forgot Password?</span>
+                                        <span>Lupa Kata Sandi?</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="mb-6">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
                             </div>
                         </form>
 
                         <p class="text-center">
-                            <span>New on our platform?</span>
+                            <span>Belum Punya Akun?</span>
                             <a href="{{ url('auth/register-basic') }}">
-                                <span>Create an account</span>
+                                <span>Buat Akun Baru</span>
                             </a>
                         </p>
                     </div>
