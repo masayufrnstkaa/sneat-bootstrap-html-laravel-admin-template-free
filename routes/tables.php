@@ -7,6 +7,7 @@ use App\Http\Controllers\tables\SubsoiController;
 use App\Http\Controllers\tables\SubsoilController;
 use Illuminate\Support\Facades\Route;
 
+<<<<<<< Updated upstream
 Route::middleware(['auth'])->group(function () {
   Route::get('/tables/basic', [Basic::class, 'index'])->name('tables-basic');
 
@@ -26,3 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/tables/subsoil', [SubsoilController::class, 'index'])->name('tables-subsoil');
 });
+=======
+Route::get('/tables/basic', [Basic::class, 'index'])->name('tables-basic');
+Route::get('/tables/chopper', [ChopperTable::class, 'index'])->name('tables-chopper');
+Route::get('/tables/bajak', [BajakController::class, 'index'])->name('tables-bajak');
+Route::get('/tables/subsoil', [SubsoilController::class, 'index'])->name('tables-subsoil');
+>>>>>>> Stashed changes
