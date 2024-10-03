@@ -30,7 +30,7 @@ class BajakController extends Controller
         try {
           // Pastikan format tanggal sesuai dengan format yang dikirimkan
           $parsedDate = Carbon::createFromFormat('d-m-y', $filterDate);
-          dd($parsedDate);
+          dd($parsedDate->toDateString());
           return $query->whereDate('TGL_Pengamatan', $parsedDate->toDateString());
         } catch (\Exception $e) {
           // Jika parsing tanggal gagal, maka tidak melakukan filter
