@@ -26,16 +26,11 @@ class BajakController extends Controller
         return $query->where('PlantGroup', $plantGroup);
       })
       ->when($filterDate, function ($query, $filterDate) {
+
         // Filter berdasarkan tanggal spesifik yang dipilih pengguna
-        try {
-          // Pastikan format tanggal sesuai dengan format yang dikirimkan
-          $parsedDate = Carbon::createFromFormat('d-m-y', $filterDate);
-          dd($parsedDate->toDateString());
-          return $query->whereDate('TGL_Pengamatan', $parsedDate->toDateString());
-        } catch (\Exception $e) {
-          // Jika parsing tanggal gagal, maka tidak melakukan filter
-          return $query;
-        }
+        $parsedDate = Carbon::createFromFormat('d-m-y', $filterDate);
+
+        return $query->where('TGL_Pengamatan', $parsedDate->format('j-M-y'));
       })
       ->get();
 
