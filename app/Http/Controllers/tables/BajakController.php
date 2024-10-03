@@ -43,6 +43,7 @@ class BajakController extends Controller
       })
       ->get();
 
+
     // Mengambil daftar Plant Group yang unik
     $plantGroups = Bajak::query()
       ->select('PlantGroup')
