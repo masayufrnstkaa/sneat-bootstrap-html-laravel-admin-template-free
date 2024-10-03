@@ -102,7 +102,7 @@
 <script>
   // Inisialisasi Flatpickr pada input dengan ID filterDate
   flatpickr("#filterDate", {
-    dateFormat: "j-M-y", // Format tanggal yang diinginkan
+    dateFormat: "d-m-y", // Format tanggal yang diinginkan
     onChange: function(selectedDates, dateStr, instance) {
         console.log('Tanggal dipilih: ', dateStr); // Debugging, lihat di console apakah tanggalnya benar
         const url = new URL(window.location.href);
