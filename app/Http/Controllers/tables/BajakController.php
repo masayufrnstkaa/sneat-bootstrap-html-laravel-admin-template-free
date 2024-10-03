@@ -16,6 +16,10 @@ class BajakController extends Controller
     $filterTime = $request->query('filterTime');
     $filterDate = $request->query('filterDate');
 
+    $date = Carbon::createFromFormat('d-m-y', $filterDate);
+    $formattedDate = $date->format('d-M-y');
+    dd($formattedDate);
+
     // Mengambil tanggal saat ini
     $currentDate = Carbon::now();
 
@@ -33,6 +37,7 @@ class BajakController extends Controller
         return $query->where('TGL_Pengamatan', $parsedDate->format('j-M-y'));
       })
       ->get();
+
 
     // Mengambil daftar Plant Group yang unik
     $plantGroups = Bajak::query()
