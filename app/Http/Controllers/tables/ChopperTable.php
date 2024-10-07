@@ -5,16 +5,28 @@ namespace App\Http\Controllers\tables;
 use App\Http\Controllers\Controller;
 use App\Models\Chopper;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class ChopperTable extends Controller
 {
   public function index(Request $request)
   {
     $plantGroup = $request->query('plantGroup');
+    $filterDate = $request->query('filterDate');
+
+    $currentDate = Carbon::now();
 
     $choppers = Chopper::query()
       ->when($plantGroup, function ($query, $plantGroup) {
         return $query->where('PlantGroup', $plantGroup);
+      })
+      ->when($filterDate, function ($query, $filterDate) {
+
+        // Filter berdasarkan tanggal spesifik yang dipilih pengguna
+        $parsedDate = Carbon::createFromFormat('d-m-y', $filterDate);
+
+        return $query->where('TanggalPengamatan', $parsedDate->format('j-M-y'));
       })
       ->get();
 
@@ -25,7 +37,7 @@ class ChopperTable extends Controller
 
     return view(
       'content.tables.table-chopper',
-      compact('choppers', 'plantGroups')
+      compact('choppers', 'plantGroups', 'filterDate')
     );
   }
 

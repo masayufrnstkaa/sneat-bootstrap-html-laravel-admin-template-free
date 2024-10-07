@@ -15,7 +15,7 @@
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                </div>
+                </div> <!-- Penutupan tag div yang sebelumnya tidak tertutup -->
             @endif
 
             <div class="btn-group p-5">
@@ -23,16 +23,19 @@
                     aria-expanded="false">Filter</button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item" href={{ route('tables-chopper') }}>Semua</a>
+                        <a class="dropdown-item" href="{{ route('tables-chopper') }}">Semua</a>
                     </li>
                     @foreach ($plantGroups as $item)
                         <li>
                             <a class="dropdown-item"
-                                href={{ route('tables-chopper') . '?plantGroup=' . $item->PlantGroup }}>{{ $item->PlantGroup }}</a>
+                                href="{{ route('tables-chopper') . '?plantGroup=' . $item->PlantGroup }}">{{ $item->PlantGroup }}</a>
                         </li>
                     @endforeach
-
                 </ul>
+
+                <div>
+                    <input type="text" id="filterDate" class="form-control" placeholder="Pilih Tanggal" />
+                </div>
             </div>
 
             <div class="table-responsive text-nowrap">
@@ -47,7 +50,7 @@
                             <th>Exs Tanaman</th>
                             <th>% Tanaman Hancur</th>
                             <th>% Bonggol Tercacah</th>
-                            <th>% Alikasi Rapat</th>
+                            <th>% Aplikasi Rapat</th>
                             <th>Total (%)</th>
                             <th>Aksi</th>
                         </tr>
@@ -63,7 +66,7 @@
                                 <td>{{ $item?->Sat }}</td>
                                 <td>{{ $item?->ExsTanaman }}</td>
                                 <td>{{ $item['% Tanaman Hancur'] ?? '-' }}</td>
-                                <td>{{ $item['% Bonggol Tercacah' ?? '-'] }}</td>
+                                <td>{{ $item['% Bonggol Tercacah'] ?? '-' }}</td> <!-- Penutupan kurung kurawal pada kolom ini diperbaiki -->
                                 <td>{{ $item['% Aplikasi Rapat'] ?? '-' }}</td>
                                 <td>{{ $item['Total (%)'] ?? '-' }}</td>
                                 <td>
@@ -92,16 +95,34 @@
                                 </td>
                             </tr>
                         @endforeach
-
-
                     </tbody>
                 </table>
             </div>
         </div>
         <!--/ Striped Rows -->
 
-        <hr class="my-12">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            // Inisialisasi Flatpickr pada input dengan ID filterDate
+            const url = new URL(window.location.href);
+            const filterDate = url.searchParams.get('filterDate');
+            if (filterDate) {
+                document.getElementById('filterDate').value = filterDate;
+            }
 
+            flatpickr("#filterDate", {
+                dateFormat: "d-m-y", // Format tanggal yang diinginkan
+                onChange: function(selectedDates, dateStr, instance) {
+                    console.log('Tanggal dipilih:', dateStr); // Debugging, lihat di console apakah tanggalnya benar
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('filterDate', dateStr);
+                    window.location.href = url.toString();
+                }
+            });
+        </script>
+
+        <hr class="my-12">
     </div>
 
 @endsection

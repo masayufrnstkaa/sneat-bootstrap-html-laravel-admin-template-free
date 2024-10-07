@@ -72,6 +72,43 @@
       ]
     },
     {
+      "name": "Management",
+      "icon": "menu-icon tf-icons bx bx bx-dock-top",
+      "slug": "pages-account-settings",
+      "submenu": [
+        {
+          "url": "pages/management-menu",
+          "name": "Menu",
+          "slug": "pages-account-settings-account"
+        },
+        {
+          "url": "pages/management-submenu",
+          "name": "Submenu",
+          "slug": "pages-account-settings-notifications"
+        },
+        {
+          "url": "pages/management-unit-kerja",
+          "name": "Unit kerja",
+          "slug": "pages-account-settings-connections"
+        },
+        {
+          "url": "pages/management-role",
+          "name": "Role",
+          "slug": "pages-account-settings-connections"
+        },
+        {
+          "url": "pages/management-user",
+          "name": "User",
+          "slug": "pages-account-settings-connections"
+        },
+        {
+          "url": "pages/management-sekuriti",
+          "name": "Sekuriti",
+          "slug": "pages-account-settings-connections"
+        }
+      ]
+    },
+    {
       "name": "Authentications",
       "icon": "menu-icon tf-icons bx bx-lock-open-alt",
       "slug": "auth",
@@ -290,6 +327,7 @@
       "name": "Tables",
       "icon": "menu-icon tf-icons bx bx-detail",
       "slug": "tables-baru",
+      "role": "admin",
       "submenu": [
         {
           "name": "Landprep",

@@ -113,3 +113,6 @@ include('tables.php');
 
 // authentication
 include('auth.php');
+
+// management
+include('management.php');
