@@ -19,17 +19,45 @@ class DatabaseSeeder extends Seeder
     // User::factory(10)->create();
 
     $useradmin = User::factory()->create([
-      'name' => 'Test User',
+      'name' => 'Masayu Franstika',
       'email' => 'test@example.com',
-      'username' => '120450016',
-      'password' => Hash::make('user01'),
+      'username' => 'admin01',
+      'password' => Hash::make('admin01'),
     ]);
 
     $usermanager = User::factory()->create([
+      'name' => 'tata',
+      'email' => 'manager@example.com',
+      'username' => 'manager',
+      'password' => Hash::make('manager01'),
+    ]);
+
+    $userkabag = User::factory()->create([
+      'name' => 'nana',
+      'email' => 'kabag1@example.com',
+      'username' => 'kabag01',
+      'password' => Hash::make('kabag01'),
+    ]);
+
+    $userkasie = User::factory()->create([
+      'name' => 'rara',
+      'email' => 'kasie1@example.com',
+      'username' => 'kasie01',
+      'password' => Hash::make('kasie01'),
+    ]);
+
+    $usermandor = User::factory()->create([
       'name' => 'udin',
-      'email' => 'test1@example.com',
-      'username' => '121450016',
-      'password' => Hash::make('user02'),
+      'email' => 'mandor1@example.com',
+      'username' => 'mandor01',
+      'password' => Hash::make('mandor01'),
+    ]);
+
+    $userpengamat = User::factory()->create([
+      'name' => 'Pengamat QCPP',
+      'email' => 'pengamat1@example.com',
+      'username' => 'pengamat01',
+      'password' => Hash::make('pengamat01'),
     ]);
 
     $admin = Role::create(['name' => 'admin']);
@@ -44,11 +72,18 @@ class DatabaseSeeder extends Seeder
     $update = Permission::create(['name' => 'update table']);
     $delete = Permission::create(['name' => 'delete table']);
 
-
     $admin->givePermissionTo($create, $read, $update, $delete);
     $manager->givePermissionTo($read);
+    $kabag->givePermissionTo($read);
+    $kasie->givePermissionTo($read);
+    $mandor->givePermissionTo($read);
+    $pengamat->givePermissionTo($read);
 
     $useradmin->assignRole('admin');
     $usermanager->assignRole('manager');
+    $userkabag->assignRole('kabag');
+    $userkasie->assignRole('kasie');
+    $usermandor->assignRole('mandor');
+    $userpengamat->assignRole('pengamat');
   }
 }

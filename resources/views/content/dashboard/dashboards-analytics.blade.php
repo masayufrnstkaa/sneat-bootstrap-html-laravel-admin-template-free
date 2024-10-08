@@ -99,9 +99,8 @@
       <div class="d-flex align-items-start row">
         <div class="col-sm-7">
           <div class="card-body">
-            <h5 class="card-title text-primary mb-3">Hello Everyone!</h5>
+            <h5 class="card-title text-primary mb-3">Hello {{ Auth::user()->name }}!</h5>
             <p class="mb-6">Kerja untuk Kinerja, untuk data yang cepat,<br>tepat, akurat dan dapat dipercaya. BISA!!!</p>
-            <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
           </div>
         </div>
         <div class="col-sm-5 text-center text-sm-left">
@@ -121,15 +120,6 @@
               <div class="avatar flex-shrink-0">
                 <img src="{{asset('assets/img/icons/unicons/chart-success.png')}}" alt="chart success" class="rounded">
               </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
-              </div>
             </div>
             <p class="mb-1">Yeild NSFC</p>
             <h4 class="card-title mb-3">200</h4>
@@ -143,15 +133,6 @@
             <div class="card-title d-flex align-items-start justify-content-between mb-4">
               <div class="avatar flex-shrink-0">
                 <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="wallet info" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
               </div>
             </div>
             <p class="mb-1">Yeild NSSC</p>
@@ -170,16 +151,6 @@
           <div class="card-header d-flex align-items-center justify-content-between">
             <div class="card-title mb-0">
               <h5 class="m-0 me-2">Rata-Rata Pengamatan Bajak Tahun 2022 - 2023</h5>
-            </div>
-            <div class="dropdown">
-              <button class="btn p-0" type="button" id="totalRevenue" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bx bx-dots-vertical-rounded bx-lg text-muted"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalRevenue">
-                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                <a class="dropdown-item" href="javascript:void(0);">Share</a>
-              </div>
             </div>
           </div>
           <div id="totalRevenueChart" class="px-3"></div>
@@ -253,15 +224,6 @@
               <div class="avatar flex-shrink-0">
                 <img src="{{asset('assets/img/icons/unicons/paypal.png')}}" alt="paypal" class="rounded">
               </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
-              </div>
             </div>
             <p class="mb-1">Keseragaman Bibit Crown</p>
             <h4 class="card-title mb-3">99.25%</h4>
@@ -275,15 +237,6 @@
             <div class="card-title d-flex align-items-start justify-content-between mb-4">
               <div class="avatar flex-shrink-0">
                 <img src="{{asset('assets/img/icons/unicons/cc-primary.png')}}" alt="Credit Card" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
               </div>
             </div>
             <p class="mb-1">Keseragaman Bibit Sucker </p>
@@ -324,16 +277,6 @@
           <h5 class="mb-1 me-2">% Pencapaian Kualitas Tanam</h5>
           <p class="card-subtitle">Dari total 112 lokasi teramati, 1 Lokasi tidak masuk STD dengan 
             rata-rata pencapaian kualitas tanam sebesar 96,74%</p>
-        </div>
-        <div class="dropdown">
-          <button class="btn text-muted p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-dots-vertical-rounded bx-lg"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-          </div>
         </div>
       </div>
       <div class="card-body">

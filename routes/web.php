@@ -43,6 +43,7 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\management\UserController;
 
 // Main Page Route
 Route::middleware(['auth'])->group(function () {
@@ -113,6 +114,3 @@ include('tables.php');
 
 // authentication
 include('auth.php');
-
-// management
-include('management.php');
