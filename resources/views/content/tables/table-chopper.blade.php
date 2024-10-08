@@ -8,35 +8,31 @@
     <div class="card">
         <h5 class="card-header">Tabel Data Pengamatan Chopper</h5>
 
-        <div class="">
-
-            @if (session('success'))
-                <div class="px-5">
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                </div> <!-- Penutupan tag div yang sebelumnya tidak tertutup -->
-            @endif
-
-            <div class="btn-group p-5">
+        <div class="d-flex justify-content-between p-3">
+            <!-- Dropdown Filter PlantGroup -->
+            <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">Filter</button>
+                    aria-expanded="false">
+                    Filter Plant Group
+                </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item" href="{{ route('tables-chopper') }}">Semua</a>
+                        <a class="dropdown-item" href="{{ route('tables-bajak') }}">Semua</a>
                     </li>
                     @foreach ($plantGroups as $item)
                         <li>
                             <a class="dropdown-item"
-                                href="{{ route('tables-chopper') . '?plantGroup=' . $item->PlantGroup }}">{{ $item->PlantGroup }}</a>
+                                href="{{ route('tables-bajak') . '?plantGroup=' . $item->PlantGroup }}">{{ $item->PlantGroup }}</a>
                         </li>
                     @endforeach
                 </ul>
-
-                <div>
-                    <input type="text" id="filterDate" class="form-control" placeholder="Pilih Tanggal" />
-                </div>
             </div>
+
+            <!-- Filter Kalender Tanggal -->
+            <div>
+                <input type="text" id="filterDate" class="form-control" placeholder="Pilih Tanggal" />
+            </div>
+        </div>
 
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped">
