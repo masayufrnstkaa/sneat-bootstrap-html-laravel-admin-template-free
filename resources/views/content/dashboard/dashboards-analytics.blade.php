@@ -29,7 +29,7 @@
     
     // Dynamic colors for each plant group
     const dynamicColors = plantGroups.map((pg, index) => {
-        const colors = ['#1E90FF', '#28B463', '#F39C12']; // Adjust as needed
+        const colors = ['#7B68EE', '#28B463', '#F39C12']; // Adjust as needed
         return colors[index % colors.length];
     });
 
@@ -70,8 +70,8 @@
         plotOptions: {
             bar: {
                 horizontal: false, // Set bar vertikal
-                columnWidth: '50%', // Lebar kolom
-                borderRadius: 10, // Ujung bar lebih halus (tidak terlalu kotak)
+                columnWidth: '25%', // Lebar kolom
+                borderRadius: 80, // Ujung bar lebih halus (tidak terlalu kotak)
                 dataLabels: {
                     position: 'top' // Display labels on top of bars
                 },
@@ -92,14 +92,14 @@
         },
         yaxis: {
             title: {
-                text: 'Rata-rata Persentase Bajak',
+                text: 'Rata-rata Presentase Pencapaian Kualitas Bajak',
                 style: {
                     fontWeight: 'normal' // Judul Y tidak bold
                 }
             },
             labels: {
                 formatter: function(val) {
-                    return val.toFixed(2) + "%"; // Ensure consistent 2-decimal places
+                    return val.toFixed() + "%"; // Ensure consistent 2-decimal places
                 }
             }
         },
@@ -206,7 +206,7 @@
         <div class="col-lg-8">
           <div class="card-header d-flex align-items-center justify-content-between">
             <div class="card-title mb-0">
-              <h5 class="m-0 me-2">Rata-Rata Pengamatan Bajak Tahun 2022 - 2023</h5>
+              <h5 class="m-0 me-2">Rata-Rata Pencapaian Kualitas Pengamatan Bajak Per PG</h5>
             </div>
           </div>
           <div id="totalRevenueChart" class="px-3"></div>
