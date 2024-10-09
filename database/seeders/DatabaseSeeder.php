@@ -20,42 +20,42 @@ class DatabaseSeeder extends Seeder
 
     $useradmin = User::factory()->create([
       'name' => 'Masayu Franstika',
-      'email' => 'test@example.com',
+      'email' => 'admin@gmail.com',
       'username' => 'admin01',
       'password' => Hash::make('admin01'),
     ]);
 
     $usermanager = User::factory()->create([
-      'name' => 'tata',
-      'email' => 'manager@example.com',
+      'name' => 'Tata',
+      'email' => 'manager@gmail.com',
       'username' => 'manager',
       'password' => Hash::make('manager01'),
     ]);
 
     $userkabag = User::factory()->create([
-      'name' => 'nana',
-      'email' => 'kabag1@example.com',
+      'name' => 'Nana',
+      'email' => 'kabag1@gmail.com',
       'username' => 'kabag01',
       'password' => Hash::make('kabag01'),
     ]);
 
     $userkasie = User::factory()->create([
-      'name' => 'rara',
-      'email' => 'kasie1@example.com',
+      'name' => 'Rara',
+      'email' => 'kasie1@gmail.com',
       'username' => 'kasie01',
       'password' => Hash::make('kasie01'),
     ]);
 
     $usermandor = User::factory()->create([
-      'name' => 'udin',
-      'email' => 'mandor1@example.com',
+      'name' => 'Udin',
+      'email' => 'mandor1@gmail.com',
       'username' => 'mandor01',
       'password' => Hash::make('mandor01'),
     ]);
 
     $userpengamat = User::factory()->create([
       'name' => 'Pengamat QCPP',
-      'email' => 'pengamat1@example.com',
+      'email' => 'pengamat1@gmail.com',
       'username' => 'pengamat01',
       'password' => Hash::make('pengamat01'),
     ]);

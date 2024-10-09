@@ -26,68 +26,124 @@
     const totalValues = Object.values(bajakTotalPersentase); // Rata-rata Total(%) sebagai sumbu Y
 
     const totalRevenueChartEl = document.querySelector('#totalRevenueChart');
+    
+    // Dynamic colors for each plant group
+    const dynamicColors = plantGroups.map((pg, index) => {
+        const colors = ['#1E90FF', '#28B463', '#F39C12']; // Adjust as needed
+        return colors[index % colors.length];
+    });
+
     const totalRevenueChartOptions = {
-            chart: {
-                type: 'bar', // Bar chart
-                height: 350,
+        chart: {
+            type: 'bar', // Bar chart
+            height: 350,
+            toolbar: {
+                show: true // Add chart download and zoom options
             },
-            plotOptions: {
-                bar: {
-                    horizontal: false, // Set bar vertikal
-                    columnWidth: '50%', // Lebar kolom
-                    borderRadius: 10, // Ujung bar lebih halus (tidak terlalu kotak)
+            animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                    enabled: true,
+                    delay: 150
+                },
+                dynamicAnimation: {
+                    enabled: true,
+                    speed: 350
+                }
+            },
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    chart: {
+                        height: 300
+                    },
+                    plotOptions: {
+                        bar: {
+                            columnWidth: '60%'
+                        }
+                    }
+                }
+            }]
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false, // Set bar vertikal
+                columnWidth: '50%', // Lebar kolom
+                borderRadius: 10, // Ujung bar lebih halus (tidak terlalu kotak)
+                dataLabels: {
+                    position: 'top' // Display labels on top of bars
                 },
             },
-            series: [{
-                    name: 'Persentase Bajak',
-                    data: totalValues // Menggunakan data dari database untuk sumbu Y
-                }
-            ],
-            xaxis: {
-                categories: plantGroups, // Sumbu X menggunakan PlantGroup (PG1, PG2, PG3)
-                title: {
-                    text: 'Plant Group',
-                    style: {
-                        fontWeight: 'normal' // Judul X tidak bold
-                    }
-                }
-            },
-            yaxis: {
-                title: {
-                    text: 'Rata-rata Persentase Bajak',
-                    style: {
-                        fontWeight: 'normal' // Judul Y tidak bold
-                    }
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent'] // Stroke transparan untuk bar chart
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return val + "%"; // Menampilkan persentase pada tooltip
-                    }
+        },
+        series: [{
+            name: 'Persentase Bajak',
+            data: totalValues // Menggunakan data dari database untuk sumbu Y
+        }],
+        xaxis: {
+            categories: plantGroups, // Sumbu X menggunakan PlantGroup (PG1, PG2, PG3)
+            title: {
+                text: 'Plant Group',
+                style: {
+                    fontWeight: 'normal' // Judul X tidak bold
                 }
             }
-        };  
-        
+        },
+        yaxis: {
+            title: {
+                text: 'Rata-rata Persentase Bajak',
+                style: {
+                    fontWeight: 'normal' // Judul Y tidak bold
+                }
+            },
+            labels: {
+                formatter: function(val) {
+                    return val.toFixed(2) + "%"; // Ensure consistent 2-decimal places
+                }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+                return val.toFixed(2) + "%"; // Menampilkan persentase di atas bar
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+        colors: dynamicColors, // Apply dynamic colors for bars
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent'] // Stroke transparan untuk bar chart
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function(val, opts) {
+                    return val.toFixed(2) + "% for " + plantGroups[opts.dataPointIndex]; // Detailed tooltip
+                }
+            }
+        },
+        grid: {
+            borderColor: '#f1f1f1'
+        }
+    };
+
     // Render chart jika elemen ditemukan
-    if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
+    if (typeof totalRevenueChartEl !== 'undefined' && totalRevenueChartEl !== null) {
         const totalRevenueChart = new window.ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
         totalRevenueChart.render();
     }
     
   });
 </script>
+
 @endsection
 
 
@@ -383,138 +439,29 @@
   </div>
   
   <!--/ Expense Overview -->
-
-  <!-- Transactions -->
-  <div class="col-md-6 col-lg-4 order-2 mb-6">
+    <!-- Expense Overview -->
+  <div class="col-md-6 col-lg-4 order-1 mb-6">
     <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="card-title m-0 me-2">Pengamatan Terbaru</h5>
-        <div class="dropdown">
-          <button class="btn text-muted p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-dots-vertical-rounded bx-lg"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-            <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-            <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-            <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+      <div class="card-header nav-align-top">
+        <h5 class="card-title m-0 me-2">Pengamatan Boom Spraying</h5>
+        <p class="card-subtitle">Volume Air Per Aktivitas</p>
+      </div>
+      <div class="card-body">
+        <div class="tab-content p-0">
+          <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
+            <div class="d-flex mb-6">
+            </div>
+            <div id="incomeChart1"></div>
+            <div class="d-flex align-items-center justify-content-center mt-6 gap-3">
+              <div class="flex-shrink-0">
+                <div id="expensesOfWeek1"></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card-body pt-4">
-        <ul class="p-0 m-0">
-          <li class="d-flex align-items-center mb-6">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/paypal.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Chopper</small>
-                <h6 class="fw-normal mb-0">PG 1</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">96A</h6> <span class="text-muted">In process</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex align-items-center mb-6">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Bajak</small>
-                <h6 class="fw-normal mb-0">PG 2</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">154C</h6> <span class="text-muted">In process</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex align-items-center mb-6">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/chart.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Drop Bibit</small>
-                <h6 class="fw-normal mb-0">PG 2</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">166A</h6> <span class="text-muted">In process</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex align-items-center mb-6">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/cc-primary.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Pool Dipping</small>
-                <h6 class="fw-normal mb-0">PG 3</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">571B</h6> <span class="text-muted">In process</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex align-items-center mb-6">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Forcing</small>
-                <h6 class="fw-normal mb-0">PG 1</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">66A</h6> <span class="text-muted">Cross Check</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex align-items-center">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/cc-warning.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="d-block">Panen</small>
-                <h6 class="fw-normal mb-0">PG 3</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-2">
-                <h6 class="fw-normal mb-0">511C</h6> <span class="text-muted">In process</span>
-              </div>
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
-  <!--/ Transactions -->
-
-    <!-- Expense Overview -->
-    <div class="col-md-6 col-lg-4 order-1 mb-6">
-      <div class="card h-100">
-        <div class="card-header nav-align-top">
-          <h5 class="card-title m-0 me-2">Pengamatan Boom Spraying</h5>
-          <p class="card-subtitle">Volume Air Per Aktivitas</p>
-        </div>
-        <div class="card-body">
-          <div class="tab-content p-0">
-            <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-              <div class="d-flex mb-6">
-              </div>
-              <div id="incomeChart1"></div>
-              <div class="d-flex align-items-center justify-content-center mt-6 gap-3">
-                <div class="flex-shrink-0">
-                  <div id="expensesOfWeek1"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!--/ Expense Overview -->
 
 

@@ -1000,7 +1000,9 @@ window.ApexCharts = ApexCharts;
     if (pg3ChartEl) {
         const pg3Chart = new ApexCharts(pg3ChartEl, optionsPG3);
         pg3Chart.render();
-    }
+    };
+
+
 
 
 })();

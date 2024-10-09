@@ -44,6 +44,7 @@ use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\management\UserController;
+use App\Http\Controllers\UserController as ControllersUserController;
 
 // Main Page Route
 Route::middleware(['auth'])->group(function () {
@@ -105,7 +106,10 @@ Route::middleware(['auth'])->group(function () {
 
   // route untuk logout
   Route::delete('/auth/logout', [LoginBasic::class, 'destroy'])->name('logout');
+
+  Route::get('/pages/management-user', [UserController::class, 'index'])->name('management.user');
 });
+
 
 
 
